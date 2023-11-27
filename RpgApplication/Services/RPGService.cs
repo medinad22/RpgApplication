@@ -1,4 +1,5 @@
-﻿using RpgApplication.Interfaces;
+﻿using RpgApplication.Entities;
+using RpgApplication.Interfaces;
 using RpgApplication.Models;
 
 namespace RpgApplication.Services
@@ -13,6 +14,20 @@ namespace RpgApplication.Services
             _mongoService = mongoService;
         }
 
+        public IEnumerable<PersonagemEntity> findPersonagens(int? forca)
+        {
+
+            return _mongoService.FindPersonagens(forca);
+            
+        }
+
+        public IEnumerable<PersonagemEntity> findPersonagens(SearchQueryDto? searchQueryDto)
+        {
+
+            return _mongoService.FindPersonagens(searchQueryDto);
+            
+        }
+
         public async Task savePersonagem(Person person)
         {
 
@@ -20,7 +35,7 @@ namespace RpgApplication.Services
             {
                 var personagem = new Personagem(person.Name);
                 Console.WriteLine(personagem.ToString());
-                await _mongoService.create(personagem);
+                await _mongoService.Create(personagem);
             }
 
             //throw new NotImplementedException();
